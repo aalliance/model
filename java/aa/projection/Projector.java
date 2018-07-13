@@ -31,13 +31,16 @@ public class Projector
     private static final double E_0 = 213_360;
 
     /*
-        Inputs: phi (latitude) and lambda (longitude) in degrees
+        Inputs: (latitude, longitude) in degrees
         Output: SPCS83 coordinates (easting, northing) in meters
 
         Pitfalls: does not work for points outside the Arizona Central zone
     */
-    public static Point2D.Double project(double phi, double lambda)
+    public static Point2D.Double project(Point2D.Double latLon)
     {
+        double phi = latLon.getX();
+        double lambda = latLon.getY();
+
         double phi_rad = toRadians(phi);
 
         double cos_phi = cos(phi_rad);
