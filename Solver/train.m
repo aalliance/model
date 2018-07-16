@@ -33,9 +33,11 @@ function mu = train(t)
 %         mu(2) = v_y*t;
 %     end
 
-m = (points(positions(nsegment+1),2)-points(positions(nsegment),2))/(points(positions(nsegment+1),1)-points(positions(nsegment),1));
-mu(1) = ((smallDistance^2)/(sqrt(smallDistance^2*(1+m^2))))+points(positions(nsegment),1);
-mu(2) = ((smallDistance^2*m)/(sqrt(smallDistance^2*(1+m^2))))+points(positions(nsegment),2);
+% m = (points(positions(nsegment+1),2)-points(positions(nsegment),2))/(points(positions(nsegment+1),1)-points(positions(nsegment),1));
+% mu(1) = ((smallDistance^2)/(sqrt(smallDistance^2*(1+m^2))))+points(positions(nsegment),1);
+% mu(2) = ((smallDistance^2*m)/(sqrt(smallDistance^2*(1+m^2))))+points(positions(nsegment),2);
+
+mu = points(nsegment,:)+(points(nsegment+1,:)-points(nsegment,:))*smallDistance/distances(nsegment);
 end
 
 
