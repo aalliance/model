@@ -5,7 +5,7 @@ import java.awt.geom.Point2D;
 /*
    Example of how to generate a CSV file using this class:
 
-   for (PrintablePoint P : list)
+   for (PrintablePoint p : list)
    {
        System.out.println(p);
    }
