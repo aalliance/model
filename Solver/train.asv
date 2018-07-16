@@ -1,0 +1,29 @@
+function mu = train(filename)
+    v = 49*1609.34; % Velocity of the train in m/h
+    d = v*t; % Distance traveled by the train at time t in milles
+    points = csvread(filename);
+    initial_pos = points(1,:);
+    [distances, positions] = Distances(filename);
+    Daccumulative = 0;
+    nsegment = 1;
+    found = false;
+    
+    while (nsegment<=length(distances) && found==false)
+        Daccumulative = Daccumulative + distances(nsegment);
+        if(d>Daccumulative)
+            nsegment = nsegment+1;
+        else
+          found = true;  
+        end
+    end
+    
+    if(nsegment == 1)
+        smallDistance = d;
+    else
+        smallDistance = d-sum(distances(1:nsegment));
+    end
+    
+    theta = atan((points(positions(nsegment+1),2)-points(positions(nsegment),2))/(points(positions(nsegment+1),1)-points(positions(nsegment),1)));
+end
+
+

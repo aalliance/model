@@ -1,0 +1,7 @@
+function [p,v] = wind2(t)
+% WIND Get the wind vector at a given time
+% v = WIND(T) gets the column vector for th
+
+p = [fits_sid_vx_t{1}(t),fits_sid_vy_t{1}(t)];
+v = [fits_sid_vx_t,y];
+end
