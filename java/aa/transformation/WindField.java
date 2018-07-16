@@ -91,7 +91,7 @@ public class WindField
                 double x = coords.getX();
                 double y = coords.getY();
 
-                if (NWLat <= x && NWLon <= y && x <= SELat && y <= SELon)
+                if (x <= NWLat && NWLon <= y && SELat <= x && y <= SELon)
                 {
                     double direction = toRadians(Double.parseDouble(record[8]));
 
