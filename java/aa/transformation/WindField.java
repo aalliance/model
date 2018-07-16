@@ -38,6 +38,11 @@ public class WindField
         clearBounds();
     }
 
+    public WindField(Point2D.Double NWCorner, Point2D.Double SECorner)
+    {
+        setBounds(NWCorner, SECorner);
+    }
+
     public WindField(Path data, Date ref, Map<String,Point2D.Double> sites)
         throws IOException, ParseException
     {
@@ -86,7 +91,7 @@ public class WindField
                 double x = coords.getX();
                 double y = coords.getY();
 
-                if (NWLat <= x && NWLon <= y && x <= SELat && y <= SELon)
+                if (x <= NWLat && NWLon <= y && SELat <= x && y <= SELon)
                 {
                     double direction = toRadians(Double.parseDouble(record[8]));
 
