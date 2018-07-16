@@ -38,6 +38,11 @@ public class WindField
         clearBounds();
     }
 
+    public WindField(Point2D.Double NWCorner, Point2D.Double SECorner)
+    {
+        setBounds(NWCorner, SECorner);
+    }
+
     public WindField(Path data, Date ref, Map<String,Point2D.Double> sites)
         throws IOException, ParseException
     {
