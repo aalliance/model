@@ -11,9 +11,6 @@ global t_begin;
         mu = train(state.time);
         mux = mu(1);
         muy = mu(2);
-        sigmax = 2000;
-        sigmay = 2000;
-        A = 10;
         % Wind vector
         [vx, vy, dxv, dyv] = windf(state.time, region.x, region.y);
         wind_advection = state.ux .* vx + state.uy .* vy;
