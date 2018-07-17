@@ -5,12 +5,17 @@ function windf = windfunction(fits_vx, fits_vy)
 % as well its partial derivatives
 
 global tinterp;
-global t_step;
-uconv = t_step*24*60*60;
+uconv = (1/20)*24*60*60; % seconds per day
 memo = containers.Map;
 
 windf = @wind;
     function [vx, vy, dxv, dyv] = wind(tq, x, y)
+        if isnan(tq)
+            n = length(x);
+            vx = ones(1, n)*NaN;  vy = ones(1, n)*NaN;
+            dxv = ones(1, n)*NaN; dyv = ones(1, n)*NaN;
+            return
+        end
         [~, tqcind] = min(abs(tinterp-tq));
         tqc = tinterp(tqcind);
         hashval = strcat(char(typecast([0;tqc],'uint8')'), ...
