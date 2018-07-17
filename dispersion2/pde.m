@@ -1,12 +1,7 @@
 %% Create Model and Geometry
 model = createpde();
-global XMIN;
-global XMAX;
-global YMIN;
-global YMAX;
-global tlist;
-global fits_vx;
-global fits_vy;
+
+global XMIN XMAX YMIN YMAX tlist fits_vx fits_vy
 memwind = windfunction(fits_vx, fits_vy);
 ffun = fcoeffunction(memwind);
 R1 = [3;4;XMIN;XMAX;XMAX;XMIN;YMAX;YMAX;YMIN;YMIN];
@@ -28,7 +23,6 @@ setInitialConditions(model,0);
 
 %% Generate and Plot Mesh
 msh = generateMesh(model,'Hmax',2000);
-%msh = generateMesh(model);
 figure;
 pdemesh(model); 
 axis equal
