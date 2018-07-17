@@ -1,6 +1,5 @@
 function mu = train(t)
-global t_begin;
-global train_end;
+global t_begin train_end
 period = train_end - t_begin;
 start_mu = [185319; 284379]; % 608k, 933k
 end_mu = [220980; 266701]; % 725k, 875k

@@ -1,6 +1,5 @@
 function ff = fcoeffunction(windf)
-global train_end;
-global t_begin;
+global train_end t_begin
     function f = fcfun(region,state)
         N = 1; % Number of equations
         nr = length(region.x); % Number of columns
@@ -22,8 +21,6 @@ global t_begin;
             source = r/(4*pi*D*w)* ... 
                      exp(-(((region.x-mux).^2 + ...
                             (region.y-muy).^2)/(4*D*w)));
-            %source = A*exp(-( (region.x-mux).^2 / (2*sigmax^2) + ...
-            %                  (region.y-muy).^2 / (2*sigmay^2)));
         else
             source = 0;
         end

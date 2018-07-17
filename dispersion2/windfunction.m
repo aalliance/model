@@ -4,7 +4,7 @@ function windf = windfunction(fits_vx, fits_vy)
 % components of the interpolated wind vector at the query points at time t
 % as well its partial derivatives
 
-global tinterp;
+global tinterp
 uconv = (1/20)*24*60*60; % seconds per day
 memo = containers.Map;
 

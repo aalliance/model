@@ -1,6 +1,4 @@
-global tinterp;
-global fits_vx;
-global fits_vy;
+global tinterp fits_vx fits_vy
 
 w = csvread('wind.csv');
 u = unique(w(:, 1:2), 'rows'); % station locations
