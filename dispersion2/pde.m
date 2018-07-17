@@ -16,7 +16,7 @@ ns = [82;49];
 g = decsg(gd,sf,ns);
 geometryFromEdges(model,g);
 
-c = 750000;
+c = 1000000;
 d = 1;
 specifyCoefficients(model,'m',0,'d',d,'c',c,'a',0,'f',ffun);
 

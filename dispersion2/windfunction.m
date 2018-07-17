@@ -5,8 +5,8 @@ function windf = windfunction(fits_vx, fits_vy)
 % as well its partial derivatives
 
 global tinterp;
-%global tstep;
-wfac = 2500;
+global t_step;
+uconv = t_step*24*60*60;
 memo = containers.Map;
 
 windf = @wind;
@@ -23,12 +23,12 @@ windf = @wind;
             dxv = out(:,3)';
             dyv = out(:,4)';
         else
-            vx = wfac*feval(fits_vx(tqc), x, y);
-            vy = wfac*feval(fits_vy(tqc), x, y);
+            vx = uconv*feval(fits_vx(tqc), x, y);
+            vy = uconv*feval(fits_vy(tqc), x, y);
             [dxv, ~] = differentiate(fits_vx(tqc), x, y);
             [~, dyv] = differentiate(fits_vy(tqc), x, y);
-            dxv = wfac*dxv;
-            dyv = wfac*dyv;
+            dxv = uconv*dxv;
+            dyv = uconv*dyv;
             out = [vx', vy', dxv', dyv'];
             memo(hashval) = out;
         end

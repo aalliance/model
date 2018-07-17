@@ -13,14 +13,20 @@ global t_begin;
         muy = mu(2);
         sigmax = 2000;
         sigmay = 2000;
-        A = 1;
+        A = 10;
         % Wind vector
         [vx, vy, dxv, dyv] = windf(state.time, region.x, region.y);
         wind_advection = state.ux .* vx + state.uy .* vy;
         wind_divergence = state.u .* (dxv + dyv);
         if state.time >= t_begin && state.time < train_end
-            source = A*exp(-( (region.x-mux).^2 / (2*sigmax^2) + ...
-                              (region.y-muy).^2 / (2*sigmay^2)));
+            w = 9*10^21;
+            r = 4.8765*10^3;
+            D = 2.3*10^-16;
+            source = r/(4*pi*D*w)* ... 
+                     exp(-(((region.x-mux).^2 + ...
+                            (region.y-muy).^2)/(4*D*w)));
+            %source = A*exp(-( (region.x-mux).^2 / (2*sigmax^2) + ...
+            %                  (region.y-muy).^2 / (2*sigmay^2)));
         else
             source = 0;
         end
