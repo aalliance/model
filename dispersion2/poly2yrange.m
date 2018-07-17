@@ -1,10 +1,25 @@
 function [cfun, dfun] = poly2yrange(shape)
     [~, y] = boundary(shape);
-    function yr = yrange(xx)
-        lineseg = [xx, min(y); xx, max(y)];
-        [in, ~] = intersect(shape, lineseg);
-        yr = in(:,2);
+    function yr = cfun1(xx)
+        yr = ones(size(xx)) * NaN;
+        N = length(xx(:));
+        for idx = 1:N
+            lineseg = [xx(idx), min(y); xx(idx), max(y)];
+            [in, ~] = intersect(shape, lineseg);
+            yri = in(:,2);
+            yr(idx) = min(yri);
+        end
     end
-    cfun = @(z) min(yrange(z));
-    dfun = @(z) max(yrange(z));
+    function yr = dfun1(xx)
+        yr = ones(size(xx)) * NaN;
+        N = length(xx(:));
+        for idx = 1:N
+            lineseg = [xx(idx), min(y); xx(idx), max(y)];
+            [in, ~] = intersect(shape, lineseg);
+            yri = in(:,2);
+            yr(idx) = max(yri);
+        end
+    end
+    cfun = @cfun1;
+    dfun = @dfun1;
 end
