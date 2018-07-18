@@ -5,7 +5,7 @@ function windf = windfunction(fits_vx, fits_vy)
 % as well its partial derivatives
 
 global tinterp
-uconv = (1/20)*24*60*60; % seconds per day
+uconv = (1/5)*24*60*60; % seconds per day
 memo = containers.Map;
 
 windf = @wind;
@@ -32,21 +32,21 @@ windf = @wind;
             %vy = uconv*feval(fits_vy(tqc), x, y);
             %[dxv, ~] = differentiate(fits_vx(tqc), x, y);
             %[~, dyv] = differentiate(fits_vy(tqc), x, y);
-            args = [x y];
+            args = [x' y'];
 
             tx = fits_vx(tqc);
             ty = fits_vy(tqc);
 
-            vx = tx(args);
-            vy = ty(args);
+            vx = tx(args)';
+            vy = ty(args)';
 
             dxv = tx.dup;
             dxv.derivative = 1;
-            dxv = dxv(args);
+            dxv = dxv(args)';
 
             dyv = ty.dup;
             dyv.derivative = 2;
-            dyv = dyv(args);
+            dyv = dyv(args)';
 
             dxv = uconv*dxv;
             dyv = uconv*dyv;
