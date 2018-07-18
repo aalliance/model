@@ -32,10 +32,15 @@ windf = @wind;
             vy = uconv*feval(fits_vy(tqc), x, y);
             %[dxv, ~] = differentiate(fits_vx(tqc), x, y);
             %[~, dyv] = differentiate(fits_vy(tqc), x, y);
+
             dxv = fits_vx(tqc).dup
             dxv.derivative = 1
+            dxv = dxv([x y])
+
             dyv = fits_vy(tqc).dup
             dyv.derivative = 2
+            dyv = dyv([x y])
+
             dxv = uconv*dxv;
             dyv = uconv*dyv;
             out = [vx', vy', dxv', dyv'];
