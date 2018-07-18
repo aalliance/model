@@ -16,7 +16,7 @@ function f = ffun(x,y,u,ux,uy,time)
     if time >= t_begin && time < train_end
         w = 9*10^21;
         %r = 4.8765*10^8;
-        r = 4.8765*10^6;
+        r = 4.8765*10^7;
         D = 2.3*10^-16;
         source = r/(4*pi*D*w)* ...
                  exp(-(((x-mux).^2 + ...

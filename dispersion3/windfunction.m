@@ -5,7 +5,7 @@ function windf = windfunction(fits_vx, fits_vy)
 % as well its partial derivatives
 
 global tinterp
-uconv = (1/2)*24*60*60; % seconds per day
+uconv = (1/6)*24*60*60; % seconds per day
 memo = containers.Map;
 
 windf = @wind;
