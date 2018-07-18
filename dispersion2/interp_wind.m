@@ -10,8 +10,8 @@ for sid = 1:ns
     scoord = u(sid,:);
     sdat = w(w(:,1)==scoord(1) & w(:,2)==scoord(2), :);
     sdats{sid} = sdat;
-    fvxt = fit(sdat(:,3), sdat(:,4), 'pchipinterp');
-    fvyt = fit(sdat(:,3), sdat(:,5), 'pchipinterp');
+    fvxt = fit(sdat(:,3), sdat(:,4), 'linearinterp');
+    fvyt = fit(sdat(:,3), sdat(:,5), 'linearinterp');
     fits_sid_vx_t{sid} = fvxt;
     fits_sid_vy_t{sid} = fvyt;
 end
