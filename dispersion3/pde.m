@@ -2,7 +2,7 @@ global XMIN XMAX YMIN YMAX tlist windf
 %% Create Model and Geometry
 model = createpde();
 
-ffun = fcoef2(windf);
+ffun = fcoef(windf);
 W = (XMAX - XMIN)*.5;
 R1 = [3;4;XMIN;XMAX;XMAX;XMIN;YMAX;YMAX;YMIN;YMIN];
 R2 = [3;4;XMIN-W;XMAX+W;XMAX+W;XMIN-W;YMAX+W;YMAX+W;YMIN-W;YMIN-W];
