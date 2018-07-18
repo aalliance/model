@@ -11,7 +11,7 @@ ns = [82;49];
 g = decsg(gd,sf,ns);
 geometryFromEdges(model,g);
 
-c = 1000000;
+c = 86400;
 d = 1;
 specifyCoefficients(model,'m',0,'d',d,'c',c,'a',0,'f',ffun);
 
@@ -22,7 +22,7 @@ applyBoundaryCondition(model,'dirichlet','Edge',1:4,'r',0,'h',1);
 setInitialConditions(model,0);
 
 %% Generate and Plot Mesh
-msh = generateMesh(model,'Hmax',2000);
+msh = generateMesh(model,'Hmax',1000);
 figure;
 pdemesh(model); 
 axis equal

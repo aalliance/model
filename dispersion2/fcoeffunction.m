@@ -16,7 +16,8 @@ global train_end t_begin
         wind_divergence = state.u .* (dxv + dyv);
         if state.time >= t_begin && state.time < train_end
             w = 9*10^21;
-            r = 4.8765*10^3;
+            %r = 4.8765*10^3;
+            r = 4.8765*10^8;
             D = 2.3*10^-16;
             source = r/(4*pi*D*w)* ... 
                      exp(-(((region.x-mux).^2 + ...

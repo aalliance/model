@@ -15,3 +15,4 @@ for i = 1:length(cdat)
 end
 croi = cdat(inidx);
 %TOTAL_POP = [croi(:).TOTAL_POP];
+save census.dat croi
