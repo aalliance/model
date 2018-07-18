@@ -1,4 +1,4 @@
-function ff = fcoef2(windf)
+function ff = fcoef(windf)
 global train_end t_begin
     function f = fcfun(x,y,u,ux,uy,time)
         N = 1; % Number of equations
