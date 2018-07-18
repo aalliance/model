@@ -28,18 +28,25 @@ windf = @wind;
             dxv = out(:,3)';
             dyv = out(:,4)';
         else
-            vx = uconv*feval(fits_vx(tqc), x, y);
-            vy = uconv*feval(fits_vy(tqc), x, y);
+            %vx = uconv*feval(fits_vx(tqc), x, y);
+            %vy = uconv*feval(fits_vy(tqc), x, y);
             %[dxv, ~] = differentiate(fits_vx(tqc), x, y);
             %[~, dyv] = differentiate(fits_vy(tqc), x, y);
+            args = [x y];
 
-            dxv = fits_vx(tqc).dup;
+            tx = fits_vx(tqc);
+            ty = fits_vy(tqc);
+
+            vx = tx(args);
+            vy = ty(args);
+
+            dxv = tx.dup;
             dxv.derivative = 1;
-            dxv = dxv([x y]);
+            dxv = dxv(args);
 
-            dyv = fits_vy(tqc).dup;
+            dyv = ty.dup;
             dyv.derivative = 2;
-            dyv = dyv([x y]);
+            dyv = dyv(args);
 
             dxv = uconv*dxv;
             dyv = uconv*dyv;
