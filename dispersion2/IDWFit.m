@@ -5,6 +5,7 @@ classdef IDWFit
         dataCoords
         numCoords
         dataVals
+        derivative = 0
     end
 
     methods (Access = private)
@@ -23,30 +24,40 @@ classdef IDWFit
 
     methods
         function fitobj = IDWFit(coords, vals)
-            fitobj.dataCoords = coords.'
-            fitobj.numCoords = size(coords, 1)
-            fitobj.dataVals = vals
+            fitobj.dataCoords = coords.';
+            fitobj.numCoords = size(coords, 1);
+            fitobj.dataVals = vals;
         end
 
-        function u = fit(self, coords)
-            weights = self.norms(coords).^(-self.P)
-
-            u = (weights * self.dataVals) ./ sum(weights, 2)
+        function fitobj = dup(self)
+            fitobj = IDWFit(self.dataCoords.', self.dataVals);
+            fitobj.P = self.P;
+            fitobj.derivative = self.derivative;
         end
 
-        function du = partial(self, coords, dim)
-            ns = self.norms(coords)
+        function u = subsref(self, S)
+            if S.type == '()'
+                if self.derivative == 0
+                    weights = self.norms(S.subs{1}).^(-self.P);
 
-            elPack = ones(size(coords, 1), 1)
+                    u = (weights * self.dataVals) ./ sum(weights, 2);
+                else
+                    coords = S.subs{1};
 
-            coordD = repmat(coords(:, dim), 1, self.numCoords)
-            dataD = kron(self.dataCoords(dim, :), elPack)
+                    ns = self.norms(coords);
 
-            weights = ns.^(-self.P)
-            dweights = -self.P * ns.^(-(self.P + 2)) .* (coordD - dataD)
-            s = sum(weights, 2)
+                    coordD = repmat(coords(:, self.derivative), 1, self.numCoords);
+                    dataD = kron(self.dataCoords(self.derivative, :), ones(size(coords, 1), 1));
 
-            du = ((dweights * self.dataVals) .* s - (weights * self.dataVals) .* sum(dweights, 2)) ./ s.^(2)
+                    weights = ns.^(-self.P);
+                    dweights = -self.P * ns.^(-(self.P + 2)) .* (coordD - dataD);
+                    s = sum(weights, 2);
+
+                    u = ((dweights * self.dataVals) .* s - (weights * self.dataVals) .* sum(dweights, 2)) ./ s.^(2);
+                end
+            else
+                u = builtin('subsref', self, S(1));
+            end
         end
     end
 end

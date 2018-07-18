@@ -32,8 +32,10 @@ for tq = tinterp
         fy = fits_sid_vy_t{sid};
         sq(sid, 5) = feval(fy, tq);
     end
-    fvxxy = fit(sq(:,1:2), sq(:,4), 'thinplateinterp');
-    fvyxy = fit(sq(:,1:2), sq(:,5), 'thinplateinterp');
+    %fvxxy = fit(sq(:,1:2), sq(:,4), 'thinplateinterp');
+    %fvyxy = fit(sq(:,1:2), sq(:,5), 'thinplateinterp');
+    fxxxy = IDWFit(sq(:, 1:2), sq(:, 4));
+    fvyxy = IDWFit(sq(:, 1:2), sq(:, 5));
     fits_t_vx_xy(tq) = fvxxy;
     fits_t_vy_xy(tq) = fvyxy;
 end
