@@ -15,7 +15,6 @@ for i = 1:length(croi)
     xq3 = xq2(mask);
     yq3 = yq2(mask);
     pdeinterp = pdeInterpolant(p2, t2, U);
-    tidxs = tidx*ones(length(xq3),1);
     z = evaluate(pdeinterp, [xq3'; yq3']);
     z = fillmissing(z,'constant',0);
     z(z < 0) = 0;
