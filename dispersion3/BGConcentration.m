@@ -23,10 +23,10 @@ for i = 1:length(croi)
 end
 warning('on','MATLAB:polyshape:repairedBySimplify');
 save concentration.mat C % concentration in block by time
-dose = C;
+Cinteg = C;
 for bidx = 1:size(C, 1)
     for tidx = 1:size(C,2)
-        dose(bidx, tidx) = (tidx*t_step)*mean(C(bidx, 1:tidx));
+        Cinteg(bidx, tidx) = (tidx*t_step)*mean(C(bidx, 1:tidx));
     end
 end
-save concentration.mat dose % integral of concentration in block over time
+save concentration.mat Cinteg % integral of concentration in block over time
