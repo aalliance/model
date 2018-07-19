@@ -15,9 +15,15 @@ function f = ffun(x,y,u,ux,uy,time)
     wind_divergence = u .* (dxv + dyv);
     if time >= t_begin && time < train_end
         w = 9*10^21;
-        %r = 4.8765*10^8;
-        r = 4.8765*10^7;
         D = 2.3*10^-16;
+        r = 4.8765*10^7;
+        % to convert concentrations --
+        % 100g ~= 10^14 spores, 2kg ~= 2*10^15
+        % 1 / (4.8765*10^7)
+        % * 0.2     ...  % 0.2 days release
+        % * 4*10^16 ...  % 2kg * 0.2 days release
+        % / 50           % spread out over m height
+        % respiration rate 8.6 m^3/day
         source = r/(4*pi*D*w)* ...
                  exp(-(((x-mux).^2 + ...
                         (y-muy).^2)/(4*D*w)));
