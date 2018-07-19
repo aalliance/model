@@ -65,3 +65,4 @@ for j = 1:length(tlist)
     Mv(j) = getframe;
 end
 % fig = figure; movie(fig,Mv,1);
+save pdesol.mat U
